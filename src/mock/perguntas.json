@@ -1,0 +1,48 @@
+{
+  "author": "Maycon Rayone",
+  "subject": "Iron Main",
+  "quiz": [
+    {
+      "question": "Qual era o número da armadura utilizada no homem de ferro 3.",
+      "answers": [
+        { 
+          "label": "Mark 45",
+          "isRight": true
+        },
+        {
+          "label": "Mark 46",
+          "isRight": false
+        },
+        {
+          "label": "Mark 49",
+          "isRight": false
+        },
+        {
+          "label": "Mark 45",
+          "isRight": false
+        }
+      ]
+    },
+    {
+      "question": "Quanto é 2 + 2",
+      "answers": [
+        { 
+          "label": "4",
+          "isRight": true
+        },
+        {
+          "label": "6",
+          "isRight": false
+        },
+        {
+          "label": "8",
+          "isRight": false
+        },
+        {
+          "label": "5",
+          "isRight": false
+        }
+      ]
+    }
+  ] 
+}
