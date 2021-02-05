@@ -5,19 +5,23 @@
     {
       "question": "Qual era o número da armadura utilizada no homem de ferro 3.",
       "answers": [
-        { 
+        {
+          "id": "1", 
           "label": "Mark 45",
           "isRight": true
         },
         {
+          "id": "2", 
           "label": "Mark 46",
           "isRight": false
         },
         {
+          "id": "3", 
           "label": "Mark 49",
           "isRight": false
         },
         {
+          "id": "4", 
           "label": "Mark 45",
           "isRight": false
         }
@@ -27,18 +31,22 @@
       "question": "Quanto é 2 + 2",
       "answers": [
         { 
+          "id": "5", 
           "label": "4",
           "isRight": true
         },
         {
+          "id": "6", 
           "label": "6",
           "isRight": false
         },
         {
+          "id": "7", 
           "label": "8",
           "isRight": false
         },
         {
+          "id": "8", 
           "label": "5",
           "isRight": false
         }

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.section`
@@ -21,7 +21,6 @@ const Widget = styled.article`
   align-items: center;
   justify-content: flex-start;
   width: 380px;
-  height: 240px;
   margin: 25px 45px;
   border-radius: 15px;
   background: ${(props)=> props.theme.colors.bgColor};
@@ -39,7 +38,6 @@ Widget.Title = styled.h4`
 
 Widget.Content = styled.div`
   width: 100%;
-  height: calc(100%);
   padding: 0 10px;
   position: relative;
   display: flex;
@@ -85,6 +83,45 @@ Widget.Button = styled.a`
   &:visited {
     text-decoration: none;
     color: #fff;
+  }
+`;
+
+
+export const List = styled.ul`
+  width: 100%;
+  margin: 25px 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  
+  li + li {
+    margin-top: 10px;
+  }
+`;
+
+export const ListItem =  styled.li`
+  color: #fff;
+  padding: 15px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  ${(props) => {
+    return props.isSelected ? css`
+    background-color: #0652DD;
+  ` : ''}
+  }
+
+  ${(props) => {;
+    return  props.isCorrect ? css`
+    background-color: #2ecc71;
+  ` : ''
+  }}
+
+  &:hover {
+    background-color: #EE5A24;
   }
 `;
 
