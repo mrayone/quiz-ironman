@@ -1,12 +1,23 @@
 import { useCallback, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Widget, { Container, Header, List, ListItem } from '../styles/Quiz';
-import questions from '../mock/perguntas.json';
+import questionsData from '../mock/perguntas.json';
 import { ImRadioUnchecked, ImRadioChecked } from 'react-icons/im';
 
 const Quiz = () => {
   const router = useRouter();
   const [selectedItem, setSelectedItem] = useState('');
+  const [nextQuizes, setNextQuizes] = useState(() => {
+    return questionsData.quizes.slice(1, questionsData.quizes.length);
+  });
+
+  const [currentQuestion, setCurrentQuestion] = useState(() => {
+    return questionsData.quizes[0];
+  });
+
+ //TODO: criar state para salvar as questões respondidas com a alternativa selecionada.
+ //
+
   const [isAnswered, setIsAnswered] = useState(false);
   const [correctQuestion, setCorrectQuestion] = useState('');
 
@@ -18,11 +29,22 @@ const Quiz = () => {
     event.preventDefault();
     setIsAnswered(true);
 
-  }, [setIsAnswered, setCorrectQuestion]);
+  }, [setIsAnswered]);
+
+  const handleNextQuestion = useCallback((event) => {
+    if(nextQuizes.length === 0) return;
+    
+     const nextQuizesCopy = nextQuizes.slice();
+     const question = nextQuizesCopy.shift();
+
+     setCurrentQuestion(question);
+     setNextQuizes(nextQuizesCopy);
+     setIsAnswered(false);
+  }, [ nextQuizes, currentQuestion, setNextQuizes, setIsAnswered, setCurrentQuestion ]);
 
   useEffect(() => {
     if(isAnswered) {
-      const correctOption = questions.quiz[0].answers.find((answer) => answer.isRight);
+      const correctOption = currentQuestion.answers.find((answer) => answer.isRight);
       setCorrectQuestion(correctOption.id);
     }
   }, [isAnswered]);
@@ -37,38 +59,43 @@ const Quiz = () => {
           </Widget.Title>
         </Header>
         <Widget.Content>
-            <p>{questions.quiz[0].question}</p>
-            {/* <ImRadioChecked  size={20}/> */}
-            <List>
-             {
-                questions.quiz[0].answers.map((resposta, index) => (
-                  <ListItem 
-                  key={resposta.id} 
-                  isSelected={selectedItem === resposta.id }
-                  isCorrect={ correctQuestion === resposta.id }
-                  onClick={
-                    (event) => {
-                      if(isAnswered) {
-                        event.preventDefault();
-                        return;
-                      }
-                      handleItemClick(resposta.id);
-                    }
-                  }>
-                    { resposta.label } 
+            <p>{currentQuestion.question}</p>
+                  <List>
+                  {
+                      currentQuestion.answers.map((resposta, index) => (
+                        <ListItem 
+                        key={resposta.id} 
+                        isSelected={selectedItem === resposta.id }
+                        isCorrect={ correctQuestion === resposta.id }
+                        onClick={
+                          (event) => {
+                            if(isAnswered) {
+                              event.preventDefault();
+                              return;
+                            }
+                            handleItemClick(resposta.id);
+                          }
+                        }>
+                          { resposta.label } 
 
-                    {
-                      selectedItem === resposta.id ?
-                      <ImRadioChecked  size={20}/> : 
-                      <ImRadioUnchecked size={20} />
+                          {
+                            selectedItem === resposta.id ?
+                            <ImRadioChecked  size={20}/> : 
+                            <ImRadioUnchecked size={20} />
+                          }
+                        </ListItem>
+                      ) )
                     }
-                  </ListItem>
-                ) )
-              }
-            </List>
-
-            <button onClick={handleConfirmClick}>Confirmar</button>
-        </Widget.Content>
+                  </List>
+              </Widget.Content>
+        
+        {
+          isAnswered 
+          ? 
+          <button onClick={handleNextQuestion}>Próxima</button>
+          : 
+          <button onClick={handleConfirmClick}>Confirmar</button>
+        }
       </Widget>
   </Container>
   );
