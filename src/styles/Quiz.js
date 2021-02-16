@@ -26,6 +26,7 @@ const Widget = styled.article`
   background: ${(props)=> props.theme.colors.bgColor};
   border: 2px solid ${(props)=> props.theme.colors.primary};
   overflow: hidden;
+  padding-bottom: 10px;
 `;
 
 Widget.Title = styled.h4`

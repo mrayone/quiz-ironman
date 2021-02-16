@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
 import Widget, { Container, Header } from '../styles/Home';
 import Link from 'next/link';
+import { Button } from '../styles/Button';
+
 
 export default function Home() {
   const [ nome, setNome ] = useState('');
@@ -30,7 +32,7 @@ export default function Home() {
                query: { name: nome },
              }
             }>
-              <Widget.Button>Iniciar { nome }</Widget.Button>
+              <Button>Iniciar { nome }</Button>
             </Link>
           </Widget.Content>
         </Widget>
