@@ -4,6 +4,7 @@ import Widget, { Container, Header, List, ListItem } from '../styles/Quiz';
 import questionsData from '../mock/perguntas.json';
 import { Button } from '../styles/Button';
 import { ImRadioUnchecked, ImRadioChecked } from 'react-icons/im';
+import Link from 'next/link';
 import WinnerText from '../components/WinnerText';
 
 const Quiz = () => {
@@ -104,7 +105,14 @@ const Quiz = () => {
         
         {
           (() => {
-            if(isAnswered && nextQuizes.length === 0) return '';
+            if(isAnswered && nextQuizes.length === 0) {
+              return (
+              <Link href="/">
+                <Button type="button">Jogar de novo</Button>
+              </Link>
+              );
+            }
+
             if(isAnswered) return <Button onClick={handleNextQuestion}>Próxima</Button>;
 
             return <Button onClick={handleConfirmClick}>Confirmar</Button>;
