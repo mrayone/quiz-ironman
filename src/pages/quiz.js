@@ -4,6 +4,7 @@ import Widget, { Container, Header, List, ListItem } from '../styles/Quiz';
 import questionsData from '../mock/perguntas.json';
 import { Button } from '../styles/Button';
 import { ImRadioUnchecked, ImRadioChecked } from 'react-icons/im';
+import WinnerText from '../components/WinnerText';
 
 const Quiz = () => {
   const router = useRouter();
@@ -63,7 +64,8 @@ const Quiz = () => {
         </Header>
         <Widget.Content>
             {
-                isAnswered && nextQuizes.length === 0 ? <p>Você acertou {myHits} de {questionsData.quizes.length}</p>
+              isAnswered && nextQuizes.length === 0 ?
+                <WinnerText text={`Você acertou ${myHits} de ${questionsData.quizes.length}`} />
                             : (
                           <>
                               <p>{currentQuestion.question}</p>
@@ -101,11 +103,12 @@ const Quiz = () => {
           </Widget.Content>
         
         {
-          isAnswered 
-          ? 
-          <Button onClick={handleNextQuestion}>Próxima</Button>
-          : 
-          <Button onClick={handleConfirmClick}>Confirmar</Button>
+          (() => {
+            if(isAnswered && nextQuizes.length === 0) return '';
+            if(isAnswered) return <Button onClick={handleNextQuestion}>Próxima</Button>;
+
+            return <Button onClick={handleConfirmClick}>Confirmar</Button>;
+          })()
         }
       </Widget>
   </Container>

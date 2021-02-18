@@ -29,7 +29,7 @@ const Widget = styled.article`
   padding-bottom: 10px;
 `;
 
-Widget.Title = styled.h4`
+Widget.Title = styled.h2`
   color: #fff;
   width: 100%;
   padding: 15px 0;
@@ -86,7 +86,6 @@ Widget.Button = styled.a`
     color: #fff;
   }
 `;
-
 
 export const List = styled.ul`
   width: 100%;
